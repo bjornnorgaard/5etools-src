@@ -185,11 +185,11 @@ class Omnisearch {
 			() => this._wrpSearchOutput.hideVe(),
 		);
 
-		document.body.addEventListener(
-			"keypress",
+		window.addEventListener(
+			"keydown",
 			(evt) => {
-				if (!EventUtil.noModifierKeys(evt) || EventUtil.isInInput(evt)) return;
-				if (EventUtil.getKeyIgnoreCapsLock(evt) !== "F") return;
+				if (!((evt.ctrlKey || evt.metaKey) && evt.key === "k")) return;
+				evt.stopPropagation();
 				evt.preventDefault();
 				this._iptSearch.focus();
 				this._iptSearch.select();
